@@ -48,13 +48,22 @@ Nos exercícios a seguir, você trabalhará com uma estrutura de dados represent
 
 Crie uma função que gere um número aleatório entre 0 e 100. Você irá criar também os testes para essa função. Utilizando o mock, defina o retorno padrão como 10. Teste se a função foi chamada, qual seu retorno e quantas vezes foi chamada.
 
+
 #### Resposta:
 
 <details>
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const obj = require('./exercise1');
 
+describe('Função numeros randômicos', () => {
+  it('Deve retorna uma valor padrão "mocanco" a função ', () => {
+    obj.getRandomIntegerInclusive = jest.fn().mockReturnValue(10);
+    expect(obj.getRandomIntegerInclusive()).toBe(10);
+    expect(obj.getRandomIntegerInclusive).toHaveBeenCalledTimes(1);
+  });
+});
 ```
 
 </details>
