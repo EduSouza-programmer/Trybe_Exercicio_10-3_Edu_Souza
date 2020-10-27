@@ -52,6 +52,8 @@ Nos exercícios a seguir, você trabalhará com uma estrutura de dados represent
 
 - <p><a href="#6"> :pushpin: 6.</a> Crie uma função que faça requisição para a api dog pictures. Mocke a requisição e crie dois testes. O primeiro deve interpretar que a requisição se resolveu e teve como valor "request sucess". O segundo deve interpretar que a requisição falhou e ter como valor "request failed". Crie todos os testes que achar necessário;</p>
 
+- <p><a href="#Bônus"> :pushpin: Bônus.</a> O código abaixo utiliza uma API de piadas e implementa o fetchJoke, que é um gerador de piadas ruins. As piadas são geradas aleatoriamente através do endpoint armazenado em API_URL. Faça um teste que verifique a chamada dessa API para um resultado específico.</p>
+
 ## :books: Exercícios
 
 ### 1°
@@ -374,6 +376,69 @@ describe('Requisições api dog pictures', () => {
 </p>
 
 #
+
+### Bônus
+
+O código abaixo utiliza uma API de piadas e implementa o fetchJoke, que é um gerador de piadas ruins. As piadas são geradas aleatoriamente através do endpoint armazenado em API_URL. Faça um teste que verifique a chamada dessa API para um resultado específico. Para isso, faça um mock do fetch, que faz a chamada à API, utilizando os seguintes dados:
+
+	{
+		'id': '7h3oGtrOfxc',
+		'joke': 'Whiteboards ... are remarkable.',
+		'status': 200
+	}
+
+	<!-- --------------------- -->
+
+	const API_URL = 'https://icanhazdadjoke.com/';
+
+	const fetchJoke = () => {
+		return fetch(API_URL, { headers: { Accept: 'application/json' }})
+			.then(response => response.json())
+			.then(data => data.joke);
+	};
+
+#### Resposta:
+
+<details>
+ <summary> :pencil2: Código Javascript</summary>
+
+```js
+const URL = 'https://icanhazdadjoke.com/';
+
+const fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () =>
+      Promise.resolve({
+        id: '7h3oGtrOfxc',
+        joke: 'Whiteboards ... are remarkable.',
+        status: 200,
+      }),
+  })
+);
+
+const fetchJoke = () => {
+  return fetch(URL, { headers: { Accept: 'application/json' } })
+    .then(response => response.json())
+    .then(data => data.joke);
+};
+
+describe('Testando o request', () => {
+  it('Deve testa a piada criada na requisição fake', () => {
+    expect(fetchJoke()).resolves.toBe('Whiteboards ... are remarkable.');
+  });
+});
+```
+
+</details>
+
+<p align="right">
+    <a href="#clipboard-Sumário">
+    <img alt="Back Sumário" src="https://img.shields.io/badge/Back-Sum%C3%A1rio-orange">
+  </a>
+</p>
+
+#
+
 
 ## :unlock: Licença
 
