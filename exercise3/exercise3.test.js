@@ -12,6 +12,7 @@ describe('Testes na função getRandomIntegerInclusive', () => {
       expect(obj.getRandomIntegerInclusive).toHaveBeenCalledWith(2, 2, 2);
     });
   });
+
   describe('Resete sua implementação e crie uma nova', () => {
     it('Deve resetar o mock e criar uma nova implementação que retorne o dobro', () => {
       obj.getRandomIntegerInclusive.mockReset();
