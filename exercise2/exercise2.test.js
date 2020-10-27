@@ -5,7 +5,6 @@ describe('Criando uma nova implementação na função', () => {
     obj.getRandomIntegerInclusive = jest
       .fn()
       .mockImplementation((num1, num2) => num1 / num2);
-
     expect(obj.getRandomIntegerInclusive(4, 2)).toBe(2);
     expect(obj.getRandomIntegerInclusive).toHaveBeenCalled();
     expect(obj.getRandomIntegerInclusive).toHaveBeenCalledTimes(1);
