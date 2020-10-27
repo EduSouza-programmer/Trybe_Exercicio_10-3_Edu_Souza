@@ -65,6 +65,13 @@ Crie uma função que gere um número aleatório entre 0 e 100. Você irá criar
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const getRandomIntegerInclusive = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+module.exports = { getRandomIntegerInclusive };
+
+/* ------------------- */
+
 const obj = require('./exercise1');
 
 describe('Função numeros randômicos', () => {
@@ -96,6 +103,13 @@ Com a mesma função do exercício anterior, utilizando o mock, crie uma nova im
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const getRandomIntegerInclusive = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+module.exports = { getRandomIntegerInclusive };
+
+/* ------------------- */
+
 const obj = require('./exercise2');
 
 describe('Criando uma nova implementação na função', () => {
@@ -132,6 +146,13 @@ Ainda com a mesma função do primeiro exercício, utilizando o mock, crie uma n
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const getRandomIntegerInclusive = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+module.exports = { getRandomIntegerInclusive };
+
+/* ------------------- */
+
 const obj = require('./exercise3');
 
 describe('Testes na função getRandomIntegerInclusive', () => {
@@ -182,6 +203,18 @@ Dentro de um mesmo arquivo, crie três funções. A primeira deve receber uma st
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const stringToUpperCase = str => str.toUpperCase();
+const stringFistIndex = str => str.charAt(0);
+const stringConcat = (str1, str2) => str1.concat(str2);
+
+module.exports = {
+  stringToUpperCase,
+  stringFistIndex,
+  stringConcat,
+};
+
+/* ------------------- */
+
 const obj = require('./exercise4');
 jest.mock('./exercise4.js');
 
@@ -238,6 +271,18 @@ Utilizando as mesmas funções do exercício anterior, repita a implementação 
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const stringToUpperCase = str => str.toUpperCase();
+const stringFistIndex = str => str.charAt(0);
+const stringConcat = (str1, str2) => str1.concat(str2);
+
+module.exports = {
+  stringToUpperCase,
+  stringFistIndex,
+  stringConcat,
+};
+
+/* ------------------- */
+
 const obj = require('./exercise5');
 
 describe('Repita a implementação para primeira função', () => {
