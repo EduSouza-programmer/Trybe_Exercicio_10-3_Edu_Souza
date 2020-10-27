@@ -44,6 +44,8 @@ Nos exercícios a seguir, você trabalhará com uma estrutura de dados represent
 
 - <p><a href="#2"> :pushpin: 2.</a> Com a mesma função do exercício anterior, utilizando o mock, crie uma nova implementação, que deve receber dois parâmetros e retornar a divisão do primeiro pelo segundo. Essa implementação deve ocorrer uma única vez. Faça os testes necessários;</p>
 
+- <p><a href="#3"> :pushpin: 3.</a> Ainda com a mesma função do primeiro exercício, utilizando o mock, crie uma nova implementação que receba três parâmetros e retorne sua multiplicação. Após fazer os devidos testes para ela, resete sua implementação e crie uma nova, que receba um parâmetro e retorne seu dobro. Faça os testes necessários;</p>
+
 ## :books: Exercícios
 
 ### 1°
@@ -90,15 +92,17 @@ Com a mesma função do exercício anterior, utilizando o mock, crie uma nova im
 ```js
 const obj = require('./exercise2');
 
-test('testando se a função foi chamada, qual seu retorno, quantas vezes foi chamada e com quais parâmetros', () => {
-  obj.getRandomIntegerInclusive = jest
-    .fn()
-    .mockImplementationOnce((num1, num2) => num1 / num2);
+describe('Criando uma nova implementação na função', () => {
+  it('Deve retorna a divisão do primeiro pelo segundo', () => {
+    obj.getRandomIntegerInclusive = jest
+      .fn()
+      .mockImplementationOnce((num1, num2) => num1 / num2);
 
-  expect(obj.getRandomIntegerInclusive(4, 2)).toBe(2);
-  expect(obj.getRandomIntegerInclusive).toHaveBeenCalled();
-  expect(obj.getRandomIntegerInclusive).toHaveBeenCalledTimes(1);
-  expect(obj.getRandomIntegerInclusive).toHaveBeenCalledWith(4, 2);
+    expect(obj.getRandomIntegerInclusive(4, 2)).toBe(2);
+    expect(obj.getRandomIntegerInclusive).toHaveBeenCalled();
+    expect(obj.getRandomIntegerInclusive).toHaveBeenCalledTimes(1);
+    expect(obj.getRandomIntegerInclusive).toHaveBeenCalledWith(4, 2);
+  });
 });
 ```
 
@@ -114,13 +118,42 @@ test('testando se a função foi chamada, qual seu retorno, quantas vezes foi ch
 
 ### 3°
 
+Ainda com a mesma função do primeiro exercício, utilizando o mock, crie uma nova implementação que receba três parâmetros e retorne sua multiplicação. Após fazer os devidos testes para ela, resete sua implementação e crie uma nova, que receba um parâmetro e retorne seu dobro. Faça os testes necessários.
+
 #### Resposta:
 
 <details>
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const obj = require('./exercise3');
 
+describe('Testes na função getRandomIntegerInclusive', () => {
+  describe('Crie uma nova implementação que receba três parâmetros e retorne sua multiplicação', () => {
+    it('Deve retorna a multiplicação dos parâmetros', () => {
+      obj.getRandomIntegerInclusive = jest
+        .fn()
+        .mockImplementation((num1, num2, num3) => num1 * num2 * num3);
+      expect(obj.getRandomIntegerInclusive(2, 2, 2)).toBe(8);
+      expect(obj.getRandomIntegerInclusive).toHaveBeenCalled();
+      expect(obj.getRandomIntegerInclusive).toHaveBeenCalledTimes(1);
+      expect(obj.getRandomIntegerInclusive).toHaveBeenCalledWith(2, 2, 2);
+    });
+  });
+  describe('Resete sua implementação e crie uma nova', () => {
+    it('Deve resetar o mock e criar uma nova implementação que retorne o dobro', () => {
+      obj.getRandomIntegerInclusive.mockReset();
+      expect(obj.getRandomIntegerInclusive).toHaveBeenCalledTimes(0);
+
+      obj.getRandomIntegerInclusive.mockImplementation(num => num * 2);
+
+      expect(obj.getRandomIntegerInclusive(2)).toBe(4);
+      expect(obj.getRandomIntegerInclusive).toHaveBeenCalled();
+      expect(obj.getRandomIntegerInclusive).toHaveBeenCalledTimes(1);
+      expect(obj.getRandomIntegerInclusive).toHaveBeenCalledWith(2);
+    });
+  });
+});
 ```
 
 </details>
