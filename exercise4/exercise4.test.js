@@ -4,11 +4,11 @@ jest.mock('./exercise4.js');
 describe('Testando as três funções', () => {
   describe('Modificando a função stringToUppercase', () => {
     it('Deve deixa a string em caixa baixa', () => {
-      obj.stringToUpperCaser.mockImplementation(str => str.toLowerCase());
-      expect(obj.stringToUpperCaser('XABLAU')).toBe('xablau');
-      expect(obj.stringToUpperCaser).toHaveBeenCalled();
-      expect(obj.stringToUpperCaser).toHaveBeenCalledTimes(1);
-      expect(obj.stringToUpperCaser).toHaveBeenCalledWith('XABLAU');
+      obj.stringToUpperCase.mockImplementation(str => str.toLowerCase());
+      expect(obj.stringToUpperCase('XABLAU')).toBe('xablau');
+      expect(obj.stringToUpperCase).toHaveBeenCalled();
+      expect(obj.stringToUpperCase).toHaveBeenCalledTimes(1);
+      expect(obj.stringToUpperCase).toHaveBeenCalledWith('XABLAU');
     });
   });
   describe('Modificando a função stringFirstIndex', () => {
