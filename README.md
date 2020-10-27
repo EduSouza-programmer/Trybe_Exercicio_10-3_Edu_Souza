@@ -50,6 +50,8 @@ Nos exercícios a seguir, você trabalhará com uma estrutura de dados represent
 
 - <p><a href="#5"> :pushpin: 5.</a> Utilizando as mesmas funções do exercício anterior, repita a implementação para a primeira função. Após repetir a implementação, restaure a implementação original e crie os testes necessários para validar;</p>
 
+- <p><a href="#6"> :pushpin: 6.</a> Crie uma função que faça requisição para a api dog pictures. Mocke a requisição e crie dois testes. O primeiro deve interpretar que a requisição se resolveu e teve como valor "request sucess". O segundo deve interpretar que a requisição falhou e ter como valor "request failed". Crie todos os testes que achar necessário;</p>
+
 ## :books: Exercícios
 
 ### 1°
@@ -268,13 +270,54 @@ describe('Repita a implementação para primeira função', () => {
 
 ### 6°
 
+Crie uma função que faça requisição para a api dog pictures. Mocke a requisição e crie dois testes. O primeiro deve interpretar que a requisição se resolveu e teve como valor "request sucess". O segundo deve interpretar que a requisição falhou e ter como valor "request failed". Crie todos os testes que achar necessário.
+
 #### Resposta:
 
 <details>
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const getRequestDog = async () => {
+  return await fetch('https://dog.ceo/api/breeds/image/randomm').then(
+    async response => {
+      const data = await response.json();
+      return response.ok ? Promise.resolve(data) : Promise.reject(data);
+    }
+  );
+};
 
+module.exports = { getRequestDog };
+
+/* ------------------ */
+
+const obj = require('./exercise6');
+
+describe('Requisições api dog pictures', () => {
+  obj.getRequestDog = jest.fn();
+  afterEach(obj.getRequestDog.mockReset);
+  describe('Testando a requisição sucesso', () => {
+    it('Deve interpretar que a requisição se resolveu', () => {
+      obj.getRequestDog.mockResolvedValue('Sucesso');
+
+      obj.getRequestDog();
+      expect(obj.getRequestDog).toHaveBeenCalled();
+      expect(obj.getRequestDog).toHaveBeenCalledTimes(1);
+      expect(obj.getRequestDog()).resolves.toBe('Sucesso');
+      expect(obj.getRequestDog).toHaveBeenCalledTimes(2);
+    });
+  });
+  describe('Testando a requisição em falha', () => {
+    it('Deve interpretar que a requisição falhou', () => {
+      obj.getRequestDog.mockRejectedValue('Falha na requisição');
+
+      // expect(obj.getRequestDog).toHaveBeenCalled();
+      expect(obj.getRequestDog).toHaveBeenCalledTimes(0);
+      expect(obj.getRequestDog()).rejects.toBe('Falha na requisição');
+      expect(obj.getRequestDog).toHaveBeenCalledTimes(1);
+    });
+  });
+});
 ```
 
 </details>
