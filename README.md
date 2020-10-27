@@ -46,6 +46,8 @@ Nos exercícios a seguir, você trabalhará com uma estrutura de dados represent
 
 - <p><a href="#3"> :pushpin: 3.</a> Ainda com a mesma função do primeiro exercício, utilizando o mock, crie uma nova implementação que receba três parâmetros e retorne sua multiplicação. Após fazer os devidos testes para ela, resete sua implementação e crie uma nova, que receba um parâmetro e retorne seu dobro. Faça os testes necessários;</p>
 
+- <p><a href="#4"> :pushpin: 4.</a> Dentro de um mesmo arquivo, crie três funções. A primeira deve receber uma string e retorná-la em caixa alta. A segunda deve também receber uma string e retornar só a primeira letra. A terceira deve receber duas strings e concatená-las. Faça o mock do arquivo. Faça uma nova implementação para a primeira função, mas agora ela deve retornar a string em caixa baixa. Para a segunda função, uma nova implementação deve retornar a última letra de uma string. A terceira deve receber três strings e concatená-las;</p>
+
 ## :books: Exercícios
 
 ### 1°
@@ -168,13 +170,48 @@ describe('Testes na função getRandomIntegerInclusive', () => {
 
 ### 4°
 
+Dentro de um mesmo arquivo, crie três funções. A primeira deve receber uma string e retorná-la em caixa alta. A segunda deve também receber uma string e retornar só a primeira letra. A terceira deve receber duas strings e concatená-las. Faça o mock do arquivo. Faça uma nova implementação para a primeira função, mas agora ela deve retornar a string em caixa baixa. Para a segunda função, uma nova implementação deve retornar a última letra de uma string. A terceira deve receber três strings e concatená-las.
+
 #### Resposta:
 
 <details>
  <summary> :pencil2: Código Javascript</summary>
 
 ```js
+const obj = require('./exercise4');
+jest.mock('./exercise4.js');
 
+describe('Testando as três funções', () => {
+  describe('Modificando a função stringToUppercase', () => {
+    it('Deve deixa a string em caixa baixa', () => {
+      obj.stringToUpperCaser.mockImplementation(str => str.toLowerCase());
+      expect(obj.stringToUpperCaser('XABLAU')).toBe('xablau');
+      expect(obj.stringToUpperCaser).toHaveBeenCalled();
+      expect(obj.stringToUpperCaser).toHaveBeenCalledTimes(1);
+      expect(obj.stringToUpperCaser).toHaveBeenCalledWith('XABLAU');
+    });
+  });
+  describe('Modificando a função stringFirstIndex', () => {
+    it('Deve retorna a última letra da string', () => {
+      obj.stringFistIndex.mockImplementation(str => str.charAt(str.length - 1));
+      expect(obj.stringFistIndex('xablau')).toBe('u');
+      expect(obj.stringFistIndex).toHaveBeenCalled();
+      expect(obj.stringFistIndex).toHaveBeenCalledTimes(1);
+      expect(obj.stringFistIndex).toHaveBeenCalledWith('xablau');
+    });
+  });
+  describe('Modificando a função stringConcat', () => {
+    it('Deve retorna três string concatenadas', () => {
+      obj.stringConcat.mockImplementation((str1, str2, str3) =>
+        str1.concat(str2, str3)
+      );
+      expect(obj.stringConcat('xa', 'bla', 'u')).toBe('xablau');
+      expect(obj.stringConcat).toHaveBeenCalled();
+      expect(obj.stringConcat).toHaveBeenCalledTimes(1);
+      expect(obj.stringConcat).toHaveBeenCalledWith('xa', 'bla', 'u');
+    });
+  });
+});
 ```
 
 </details>
